@@ -1,0 +1,24 @@
+<launch>
+
+    <arg name="world_name" default="empty"/>
+    <arg name="gazebo_gui" default="true"/>
+
+    <!-- Launch Gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find follower_gazebo)/worlds/$(arg world_name).world"/>
+        <arg name="gui" value="$(arg gazebo_gui)"/>
+    </include>
+
+    <!-- Spawn follower -->
+    <include file="$(find follower_description)/launch/follower.launch">
+        <arg name="x" value="0.0"/>
+        <arg name="y" value="0.0"/>
+        <arg name="z" value="0.2"/>
+    </include>
+
+    <!-- Spawn leader -->
+
+    <!-- Rviz -->
+    <include file="$(find follower_rviz)/launch/rviz.launch"/>
+
+</launch>

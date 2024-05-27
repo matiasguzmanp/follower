@@ -9,4 +9,9 @@
     <node name="follower_spawn" pkg="gazebo_ros" type="spawn_model" 
         args="-urdf -param robot_description -model follower -x $(arg x) -y $(arg y) -z $(arg z)" />
 
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="tf_prefix" type="string" value="follower" />
+    </node>
+
 </launch>

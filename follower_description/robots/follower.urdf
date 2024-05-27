@@ -5,6 +5,12 @@
     <xacro:include filename="$(find follower_description)/urdf/pioneer3at.urdf.xacro" />
     <xacro:pioneer3at prefix="base" />
 
+    <!-- Sensors -->
+    <xacro:include filename="$(find follower_description)/urdf/realsense_d435.urdf.xacro" />
+    <xacro:sensor_d435 name="camera" topics_ns="camera" parent="base_link" publish_pointcloud="true">
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
+    </xacro:sensor_d435>  
+
     <!-- Gazebo plugins -->
     <xacro:include filename="$(find follower_description)/urdf/gazebo.urdf.xacro" />
     <xacro:p3at_control prefix="follower" />
