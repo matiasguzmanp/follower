@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <param name="robot_description" command="$(find xacro)/xacro '$(find follower_description)/urdf/pioneer3at.urdf'" />
+    <param name="robot_description" command="$(find xacro)/xacro '$(find follower_description)/robots/follower.urdf'" />
 
     <arg name="x" default="0.0"/>
     <arg name="y" default="0.0"/>
     <arg name="z" default="0.2"/>
 
     <node name="follower_spawn" pkg="gazebo_ros" type="spawn_model" 
-        args="-urdf -param robot_description -model pioneer3at -x $(arg x) -y $(arg y) -z $(arg z)" />
+        args="-urdf -param robot_description -model follower -x $(arg x) -y $(arg y) -z $(arg z)" />
 
 </launch>

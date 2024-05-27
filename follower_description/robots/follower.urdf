@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="follower" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Base -->
+    <xacro:include filename="$(find follower_description)/urdf/pioneer3at.urdf.xacro" />
+    <xacro:pioneer3at prefix="base" />
+
+    <!-- Gazebo plugins -->
+    <xacro:include filename="$(find follower_description)/urdf/gazebo.urdf.xacro" />
+    <xacro:p3at_control prefix="follower" />
+    <xacro:p3at_wheel link="p3at_front_left_wheel_link" />
+    <xacro:p3at_wheel link="p3at_front_right_wheel_link" />
+    <xacro:p3at_wheel link="p3at_back_left_wheel_link" />
+    <xacro:p3at_wheel link="p3at_back_right_wheel_link" />
+
+
+</robot>
