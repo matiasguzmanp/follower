@@ -9,14 +9,12 @@
         <arg name="gui" value="$(arg gazebo_gui)"/>
     </include>
 
-    <!-- Spawn follower -->
+    <!-- Spawn the robot -->
     <include file="$(find follower_description)/launch/follower.launch">
         <arg name="x" value="0.0"/>
         <arg name="y" value="0.0"/>
         <arg name="z" value="0.2"/>
     </include>
-
-    <!-- Spawn leader -->
 
     <!-- Rviz -->
     <include file="$(find follower_rviz)/launch/rviz.launch"/>

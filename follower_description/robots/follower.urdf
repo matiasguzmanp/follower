@@ -1,23 +1,19 @@
 <?xml version="1.0"?>
 <robot name="follower" xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <!-- Base -->
-    <xacro:include filename="$(find follower_description)/urdf/pioneer3at.urdf.xacro" />
-    <xacro:pioneer3at prefix="base" />
+    <xacro:macro name="robot" params="prefix">
+        <!-- Base -->
+        <xacro:include filename="$(find follower_description)/urdf/pioneer3at.urdf.xacro" />
+        <xacro:pioneer3at prefix="${prefix}" />
 
-    <!-- Sensors -->
-    <xacro:include filename="$(find follower_description)/urdf/realsense_d435.urdf.xacro" />
-    <xacro:sensor_d435 name="camera" topics_ns="camera" parent="base_link" publish_pointcloud="true">
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
-    </xacro:sensor_d435>  
+        <!-- Sensors -->
+        <xacro:include filename="$(find follower_description)/urdf/realsense_d435.urdf.xacro" />
+        <xacro:sensor_d435 name="${prefix}/camera" topics_ns="${prefix}/camera" parent="${prefix}/base_link" publish_pointcloud="true">
+            <origin xyz="0 0 0.5" rpy="0 0 0" />
+        </xacro:sensor_d435>  
+    </xacro:macro>
 
-    <!-- Gazebo plugins -->
-    <xacro:include filename="$(find follower_description)/urdf/gazebo.urdf.xacro" />
-    <xacro:p3at_control prefix="follower" />
-    <xacro:p3at_wheel link="p3at_front_left_wheel_link" />
-    <xacro:p3at_wheel link="p3at_front_right_wheel_link" />
-    <xacro:p3at_wheel link="p3at_back_left_wheel_link" />
-    <xacro:p3at_wheel link="p3at_back_right_wheel_link" />
-
+    <!-- Create the robot -->
+    <xacro:robot prefix="tulio" />
 
 </robot>

@@ -7,14 +7,14 @@
 
   <xacro:macro name="pioneer3at" params="prefix">
 
-  <link name="base_footprint">
+  <link name="${prefix}/base_footprint">
    </link>
-  <joint name="base_footprint_joint" type="fixed">
-     <parent link="base_footprint"/>
-     <child link="base_link"/>
+  <joint name="${prefix}/base_footprint_joint" type="fixed">
+     <parent link="${prefix}/base_footprint"/>
+     <child link="${prefix}/base_link"/>
   </joint>
     <!-- Chassis -->
-    <link name="base_link">
+    <link name="${prefix}/base_link">
       <!--  For pointers on inertial and gazebo-related parameters see
             * http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
                         * http://answers.gazebosim.org/question/4372/the-inertia-matrix-explained/
@@ -44,11 +44,11 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="base_link">
+    <gazebo reference="${prefix}/base_link">
       <material value="Gazebo/Red"/>
     </gazebo>
     <!-- Top -->
-    <link name="top_plate">
+    <link name="${prefix}/top_plate">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="-0.025 0 -0.223"/>
@@ -64,16 +64,16 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="top_plate">
+    <gazebo reference="${prefix}/top_plate">
       <material>Gazebo/Black</material>
     </gazebo>
-    <joint name="base_top_joint" type="fixed">
+    <joint name="${prefix}/base_top_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0.003 0 0.274"/>
-      <parent link="base_link"/>
-      <child link="top_plate"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/top_plate"/>
     </joint>
     <!-- Front + Back Sonar -->
-    <link name="front_sonar">
+    <link name="${prefix}/front_sonar">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -89,15 +89,15 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="front_sonar">
+    <gazebo reference="${prefix}/front_sonar">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="base_front_joint" type="fixed">
+    <joint name="${prefix}/base_front_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0.193 0 0.25"/>
-      <parent link="base_link"/>
-      <child link="front_sonar"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/front_sonar"/>
     </joint>
-    <link name="back_sonar">
+    <link name="${prefix}/back_sonar">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -113,16 +113,16 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="back_sonar">
+    <gazebo reference="${prefix}/back_sonar">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="base_back_joint" type="fixed">
+    <joint name="${prefix}/base_back_joint" type="fixed">
       <origin rpy="0 0 0" xyz="-0.187 0 0.247"/>
-      <parent link="base_link"/>
-      <child link="back_sonar"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/back_sonar"/>
     </joint>
     <!-- Front Axles + Wheels + Hubcaps -->
-    <link name="p3at_front_left_axle">
+    <link name="${prefix}/p3at_front_left_axle">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -138,15 +138,15 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="p3at_front_left_axle">
+    <gazebo reference="${prefix}/p3at_front_left_axle">
       <material value="Gazebo/Grey"/>
     </gazebo>
-    <joint name="base_front_left_axle_joint" type="fixed">
+    <joint name="${prefix}/base_front_left_axle_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0.135 0.156 0.111"/>
-      <parent link="base_link"/>
-      <child link="p3at_front_left_axle"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/p3at_front_left_axle"/>
     </joint>
-    <link name="p3at_front_left_hub">
+    <link name="${prefix}/p3at_front_left_hub">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -162,15 +162,15 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="p3at_front_left_hub">
+    <gazebo reference="${prefix}/p3at_front_left_hub">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="base_front_left_hub_joint" type="fixed">
+    <joint name="${prefix}/base_front_left_hub_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0 0.041 0"/>
-      <parent link="p3at_front_left_axle"/>
-      <child link="p3at_front_left_hub"/>
+      <parent link="${prefix}/p3at_front_left_axle"/>
+      <child link="${prefix}/p3at_front_left_hub"/>
     </joint>
-    <link name="p3at_front_left_wheel">
+    <link name="${prefix}/p3at_front_left_wheel">
       <inertial>
         <mass value="1.2"/>
         <!-- 1.4 kg - axle 0.1 kg - hub 0.1 kg -->
@@ -194,20 +194,20 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_front_left_wheel">
+    <gazebo reference="${prefix}/p3at_front_left_wheel">
       <material value="Gazebo/Black"/>
     </gazebo>
-    <joint name="p3at_front_left_wheel_joint" type="continuous">
+    <joint name="${prefix}/p3at_front_left_wheel_joint" type="continuous">
       <axis xyz="0 1 0"/>
       <anchor xyz="0 0 0"/>
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.7"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <parent link="p3at_front_left_hub"/>
-      <child link="p3at_front_left_wheel"/>
+      <parent link="${prefix}/p3at_front_left_hub"/>
+      <child link="${prefix}/p3at_front_left_wheel"/>
     </joint>
     <!-- Back Axles + Wheels + Hubcaps -->
-    <link name="p3at_back_left_axle">
+    <link name="${prefix}/p3at_back_left_axle">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -229,15 +229,15 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_left_axle">
+    <gazebo reference="${prefix}/p3at_back_left_axle">
       <material value="Gazebo/Grey"/>
     </gazebo>
-    <joint name="p3at_back_left_axle_joint" type="fixed">
+    <joint name="${prefix}/p3at_back_left_axle_joint" type="fixed">
       <origin rpy="0 0 0" xyz="-0.134 0.156 0.111"/>
-      <parent link="base_link"/>
-      <child link="p3at_back_left_axle"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/p3at_back_left_axle"/>
     </joint>
-    <link name="p3at_back_left_hub">
+    <link name="${prefix}/p3at_back_left_hub">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -257,15 +257,15 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_left_hub">
+    <gazebo reference="${prefix}/p3at_back_left_hub">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="p3at_back_left_hub_joint" type="fixed">
+    <joint name="${prefix}/p3at_back_left_hub_joint" type="fixed">
       <origin rpy="0 0 0" xyz="-0 0.041 0"/>
-      <parent link="p3at_back_left_axle"/>
-      <child link="p3at_back_left_hub"/>
+      <parent link="${prefix}/p3at_back_left_axle"/>
+      <child link="${prefix}/p3at_back_left_hub"/>
     </joint>
-    <link name="p3at_back_left_wheel">
+    <link name="${prefix}/p3at_back_left_wheel">
       <inertial>
         <mass value="1.2"/>
         <origin xyz="0 0 0"/>
@@ -286,21 +286,21 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_left_wheel">
+    <gazebo reference="${prefix}/p3at_back_left_wheel">
       <material value="Gazebo/Black"/>
     </gazebo>
-    <joint name="p3at_back_left_wheel_joint" type="continuous">
+    <joint name="${prefix}/p3at_back_left_wheel_joint" type="continuous">
       <axis xyz="0 1 0"/>
       <anchor xyz="0 0 0"/>
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.7"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <parent link="p3at_back_left_hub"/>
-      <child link="p3at_back_left_wheel"/>
+      <parent link="${prefix}/p3at_back_left_hub"/>
+      <child link="${prefix}/p3at_back_left_wheel"/>
     </joint>
 
     <!-- Front Axles + Wheels + Hubcaps -->
-    <link name="p3at_front_right_axle">
+    <link name="${prefix}/p3at_front_right_axle">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -316,15 +316,15 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="p3at_front_right_axle">
+    <gazebo reference="${prefix}/p3at_front_right_axle">
       <material value="Gazebo/Grey"/>
     </gazebo>
-    <joint name="base_front_right_axle_joint" type="fixed">
+    <joint name="${prefix}/base_front_right_axle_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0.135 -0.156 0.111"/>
-      <parent link="base_link"/>
-      <child link="p3at_front_right_axle"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/p3at_front_right_axle"/>
     </joint>
-    <link name="p3at_front_right_hub">
+    <link name="${prefix}/p3at_front_right_hub">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -340,15 +340,15 @@
         </material>
       </visual>
     </link>
-    <gazebo reference="p3at_front_right_hub">
+    <gazebo reference="${prefix}/p3at_front_right_hub">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="base_front_right_hub_joint" type="fixed">
+    <joint name="${prefix}/base_front_right_hub_joint" type="fixed">
       <origin rpy="0 0 0" xyz="0 -0.041 0"/>
-      <parent link="p3at_front_right_axle"/>
-      <child link="p3at_front_right_hub"/>
+      <parent link="${prefix}/p3at_front_right_axle"/>
+      <child link="${prefix}/p3at_front_right_hub"/>
     </joint>
-    <link name="p3at_front_right_wheel">
+    <link name="${prefix}/p3at_front_right_wheel">
       <inertial>
         <mass value="1.2"/>
         <!-- 1.4 kg - axle 0.1 kg - hub 0.1 kg -->
@@ -372,20 +372,20 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_front_right_wheel">
+    <gazebo reference="${prefix}/p3at_front_right_wheel">
       <material value="Gazebo/Black"/>
     </gazebo>
-    <joint name="p3at_front_right_wheel_joint" type="continuous">
+    <joint name="${prefix}/p3at_front_right_wheel_joint" type="continuous">
       <axis xyz="0 1 0"/>
       <anchor xyz="0 0 0"/>
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.7"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <parent link="p3at_front_right_hub"/>
-      <child link="p3at_front_right_wheel"/>
+      <parent link="${prefix}/p3at_front_right_hub"/>
+      <child link="${prefix}/p3at_front_right_wheel"/>
     </joint>
     <!-- Back Axles + Wheels + Hubcaps -->
-    <link name="p3at_back_right_axle">
+    <link name="${prefix}/p3at_back_right_axle">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -407,15 +407,15 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_right_axle">
+    <gazebo reference="${prefix}/p3at_back_right_axle">
       <material value="Gazebo/Grey"/>
     </gazebo>
-    <joint name="p3at_back_right_axle_joint" type="fixed">
+    <joint name="${prefix}/p3at_back_right_axle_joint" type="fixed">
       <origin rpy="0 0 0" xyz="-0.134 -0.156 0.111"/>
-      <parent link="base_link"/>
-      <child link="p3at_back_right_axle"/>
+      <parent link="${prefix}/base_link"/>
+      <child link="${prefix}/p3at_back_right_axle"/>
     </joint>
-    <link name="p3at_back_right_hub">
+    <link name="${prefix}/p3at_back_right_hub">
       <inertial>
         <mass value="0.1"/>
         <origin xyz="0 0 0"/>
@@ -435,15 +435,15 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_right_hub">
+    <gazebo reference="${prefix}/p3at_back_right_hub">
       <material value="Gazebo/Yellow"/>
     </gazebo>
-    <joint name="p3at_back_right_hub_joint" type="fixed">
+    <joint name="${prefix}/p3at_back_right_hub_joint" type="fixed">
       <origin rpy="0 0 0" xyz="-0 -0.041 0"/>
-      <parent link="p3at_back_right_axle"/>
-      <child link="p3at_back_right_hub"/>
+      <parent link="${prefix}/p3at_back_right_axle"/>
+      <child link="${prefix}/p3at_back_right_hub"/>
     </joint>
-    <link name="p3at_back_right_wheel">
+    <link name="${prefix}/p3at_back_right_wheel">
       <inertial>
         <mass value="1.2"/>
         <origin xyz="0 0 0"/>
@@ -464,23 +464,26 @@
         </geometry>
       </collision>
     </link>
-    <gazebo reference="p3at_back_right_wheel">
+    <gazebo reference="${prefix}/p3at_back_right_wheel">
       <material value="Gazebo/Black"/>
     </gazebo>
-    <joint name="p3at_back_right_wheel_joint" type="continuous">
+    <joint name="${prefix}/p3at_back_right_wheel_joint" type="continuous">
       <axis xyz="0 1 0"/>
       <anchor xyz="0 0 0"/>
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.7"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <parent link="p3at_back_right_hub"/>
-      <child link="p3at_back_right_wheel"/>
+      <parent link="${prefix}/p3at_back_right_hub"/>
+      <child link="${prefix}/p3at_back_right_wheel"/>
     </joint>
 
-  <!-- Gazebo -->
-
-
-
+    <!-- Gazebo -->
+    <xacro:include filename="$(find follower_description)/urdf/gazebo.urdf.xacro" />
+    <xacro:p3at_control prefix="${prefix}" />
+    <xacro:p3at_wheel link="${prefix}/p3at_front_left_wheel_link" />
+    <xacro:p3at_wheel link="${prefix}/p3at_front_right_wheel_link" />
+    <xacro:p3at_wheel link="${prefix}/p3at_back_left_wheel_link" />
+    <xacro:p3at_wheel link="${prefix}/p3at_back_right_wheel_link" />
 
   </xacro:macro>
   
