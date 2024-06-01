@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<robot name="sensor_hokuyo_urg04lx" xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro name="sensor_hokuyo_urg04lx" params="name parent *origin">
+
+		<joint name="${name}_joint" type="fixed">
+			<xacro:insert_block name="origin" />
+			<parent link="${parent}"/>
+			<child link="${name}_link"/>
+		</joint>
+
+		<link name="${name}_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<box size="0.1 0.1 0.08"/>
+				</geometry>
+			</collision>
+
+			<visual>
+				<origin xyz="0 0 -0.02" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://follower_description/meshes/hokuyo/hokuyo.dae"/>
+				</geometry>
+			</visual>
+
+			<inertial>
+				<mass value="1e-5" />
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+			</inertial>
+		</link>
+
+    <!-- Gazebo -->
+    <xacro:include filename="$(find follower_description)/urdf/gazebo.urdf.xacro" />
+    <xacro:sensor_hokuyo_urg_gazebo name="${name}" />
+
+    </xacro:macro>
+</robot>

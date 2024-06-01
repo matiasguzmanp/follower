@@ -22,9 +22,6 @@
             </plugin>
         </gazebo>
 
-      <!-- <gazebo>
-        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so" />
-      </gazebo> -->
     </xacro:macro>
 
     <xacro:macro name='p3at_wheel' params='link'>
@@ -182,5 +179,41 @@
     </gazebo>
 
   </xacro:macro>
+
+	<xacro:macro name="sensor_hokuyo_urg_gazebo" params="name">
+		<gazebo reference="${name}_link">
+			<sensor type="gpu_ray" name="${name}_sensor">
+				<pose>0 0 0 0 0 0</pose>
+				<visualize>true</visualize>
+				<update_rate>10</update_rate>
+
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>640</samples>
+							<resolution>1</resolution>
+							<min_angle>-2.0943</min_angle>
+							<max_angle>2.0943</max_angle>
+						</horizontal>
+					</scan>
+					<range>
+						<min>0.02</min>
+						<max>4.0</max>
+						<resolution>0.00628318531</resolution>
+					</range>
+					<noise>
+						<type>gaussian</type>
+						<mean>0.0</mean>
+						<stddev>0.01</stddev>
+					</noise>
+				</ray>
+
+				<plugin name="${name}_controller" filename="libgazebo_ros_gpu_laser.so">
+					<topicName>${name}/scan</topicName>
+					<frameName>${name}_link</frameName>
+				</plugin>
+			</sensor>
+		</gazebo>
+	</xacro:macro>
 
 </robot>

@@ -7,10 +7,19 @@
         <xacro:pioneer3at prefix="${prefix}" />
 
         <!-- Sensors -->
+
+        <!-- RealSense D435 -->
         <xacro:include filename="$(find follower_description)/urdf/realsense_d435.urdf.xacro" />
         <xacro:sensor_d435 name="${prefix}/camera" topics_ns="${prefix}/camera" parent="${prefix}/base_link" publish_pointcloud="true">
             <origin xyz="0 0 0.5" rpy="0 0 0" />
         </xacro:sensor_d435>  
+
+        <!-- Hokuyo URG-04LX -->
+        <xacro:include filename="$(find follower_description)/urdf/hokuyo_urg04lx.urdf.xacro" />
+        <xacro:sensor_hokuyo_urg04lx name="${prefix}/hokuyo" parent="${prefix}/top_plate">
+            <origin xyz="0.2 0 0.06" rpy="0 0 0" />
+        </xacro:sensor_hokuyo_urg04lx>
+
     </xacro:macro>
 
     <!-- Create the robot -->
