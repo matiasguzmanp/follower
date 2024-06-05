@@ -4,3 +4,6 @@
 [submodule "gazebo-ros-actor-plugin"]
 	path = gazebo-ros-actor-plugin
 	url = https://github.com/blackcoffeerobotics/gazebo-ros-actor-plugin
+[submodule "ultralytics_ros"]
+	path = ultralytics_ros
+	url = https://github.com/Alpaca-zip/ultralytics_ros

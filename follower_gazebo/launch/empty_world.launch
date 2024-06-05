@@ -16,6 +16,10 @@
         <arg name="z" value="0.2"/>
     </include>
 
+    <include file="$(find ultralytics_ros)/launch/tracker.launch">
+        <arg name="input_topic" default="/tulio/camera/color/image_raw"/>
+    </include>
+
     <!-- Rviz -->
     <include file="$(find follower_rviz)/launch/rviz.launch"/>
 

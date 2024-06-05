@@ -11,7 +11,7 @@
         <!-- RealSense D435 -->
         <!-- TODO: IMPLEMENT THIS FIX https://github.com/pal-robotics/realsense_gazebo_plugin/issues/31 -->
         <xacro:include filename="$(find follower_description)/urdf/realsense_d435.urdf.xacro" />
-        <xacro:sensor_d435 name="${prefix}/camera" topics_ns="${prefix}/camera" parent="${prefix}/base_link" publish_pointcloud="false">
+        <xacro:sensor_d435 name="${prefix}/camera" topics_ns="${prefix}/camera" parent="${prefix}/base_link" publish_pointcloud="true">
             <origin xyz="0 0 0.5" rpy="0 0 0" />
         </xacro:sensor_d435>  
 
