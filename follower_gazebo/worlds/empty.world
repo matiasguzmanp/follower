@@ -115,7 +115,7 @@
     </gui>
 
     <actor name="actor1">
-      <pose>0 0 1.2138 0 0 0</pose>
+      <pose>0 0 1.0 0 0 0</pose>
       <skin>
         <filename>moonwalk.dae</filename>
         <!-- <filename>model://DoctorFemaleWalk/meshes/DoctorFemaleWalk.dae</filename> -->
