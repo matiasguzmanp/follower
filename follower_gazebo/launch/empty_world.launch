@@ -16,9 +16,17 @@
         <arg name="z" value="0.2"/>
     </include>
 
-    <include file="$(find ultralytics_ros)/launch/tracker.launch">
+    <!-- Launch vision -->
+    <!-- <include file="$(find ultralytics_ros)/launch/tracker.launch">
         <arg name="input_topic" default="/tulio/camera/color/image_raw"/>
-    </include>
+    </include> -->
+
+    <rosparam file="$(find follower_description)/config/config.yaml" command="load" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="head_joint_position_controller joint_state_controller"/> 
+    <!-- converts joint states to TF transforms -->
+    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="/joint_states" to="/tulio/joint_states" />
+    </node> -->
 
     <!-- Rviz -->
     <include file="$(find follower_rviz)/launch/rviz.launch"/>
